@@ -36,10 +36,10 @@ class DeepfakeDetector:
         try:
             self.ai_gen_pipe = pipeline(
                 "image-classification", 
-                model="umm-maybe/AI-Image-Detector", 
+                model="Ateeqq/ai-vs-human-image-detector", 
                 device=self.device
             )
-            print("✅ AI Generation Detection Model Loaded")
+            print("✅ AI Generation Detection Model Loaded (Ateeqq/ai-vs-human)")
         except Exception as e:
             print(f"❌ Failed to load AI Generation Model: {e}")
             self.ai_gen_pipe = None
@@ -69,7 +69,8 @@ class DeepfakeDetector:
         
         try:
             results = self.ai_gen_pipe(image)
-            # Check labels for this specific model. Usually 'artificial' vs 'human'
+            # Check labels for this specific model. 
+            # Ateeqq/ai-vs-human-image-detector uses labels: ['ai', 'hum']
             ai_score = 0.0
             for res in results:
                 if res['label'].lower() in ['artificial', 'ai', 'fake']:
